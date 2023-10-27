@@ -46,16 +46,23 @@ while True:
                     car_cnt += 1
                     break
         else:
-            print("MSG: 만석입니다.")
+            print("MSG: 만차입니다. 다음에 이용해주세요.")
     elif select_num == 2:   # 출고
-        # 1. 차량번호 입력받기
-        # 2. 주차타워에서 차량번호 확인
-        # 2-1. x -> 차 없음
-        # 2-2. 출고(tower 값 => ""), (car_cnt -= 1)
-        pass
+        car_num = input(">>출고: ")# 1. 차량번호 입력받기
+        if car_num in tower:
+            for i, car in enumerate(tower):# 2. 주차타워에서 차량번호 확인
+                if car == car_num:# 2-1. x -> 차 없음
+                    tower[i] = ""
+                    print(f"{car_num}차량이 출고되었습니다.")
+                    car_cnt -=1# 2-2. 출고(tower 값 => ""), (car_cnt -= 1)
+                    break
+        else:
+            print("MSG: 해당 번호로 입고 된 차량이 없습니다.")
+
+
     elif select_num == 3:   # 조회
-        for i in range(max_car):
-            print(f"{i+1}층 == {tower[i]}")
+        for i in range(len(tower)-1, -1, -1):
+            print(f"> {i+1}층 {tower[i]}")
     elif select_num == 4:   # 종료
         print("MSG: 프로그램을 종료합니다.")
         exit()  # == break;
