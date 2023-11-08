@@ -14,7 +14,8 @@ result = requests.get(url)
 if result.status_code == 200:
     print(result, "접속 성공 -> 데이터를 수집합니다.")
     doc = BeautifulSoup(result.text, "html.parser")
-    url_list = doc.select("ul.list_news2 a.link_txt")
+    url_list = doc.select("ul.list_news2 a.link_tx"
+                          "t")
     for url in url_list:
         count += 1
         print(f"{count}번 기사", "="*100)
