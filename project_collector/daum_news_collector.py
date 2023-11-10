@@ -13,6 +13,8 @@ import requests                # 1.전체 소스코드
 from bs4 import BeautifulSoup  # 2. bs4에 전달 3.원하는 정보 SELECT
 from service.service_news import get_news
 
+
+
 count = 0  # 전체 기사 수
 page = 1   # 시작 페이지 1로 고정
 
