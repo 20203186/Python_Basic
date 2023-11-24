@@ -10,6 +10,7 @@ import re
 import time
 from bs4 import BeautifulSoup
 
+from db.movie_dao import add_review
 # Selenium + BeautifulSoup4
 #  - Selenium: 전체 소스코드 가져오기(+동적으로 페이지 조작)
 #  - BeautifulSoup4: 필요한 데이터만 Select
@@ -96,6 +97,16 @@ for item in review_list:
     # 21시간 전 잘못 뜨는 경우를 어떤 조건으로 찾을 수 있을지?
     #print("수정 필요!")
 
+    #MariaDB에 저장
+    # 1) DB에 보낼 데이터 만들기
+    data = {
+        "title": movie_title,
+        "score": review_score,
+        "review": review_content,
+        "writer": review_writer,
+        "reg_date": review_date
+    }
+    add_review(data)
 
 
 
