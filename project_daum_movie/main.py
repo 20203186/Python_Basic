@@ -32,7 +32,7 @@ service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=options)
 
 # URL 접속
-url = "https://movie.daum.net/moviedb/grade?movieId=169137"
+url = "https://movie.daum.net/moviedb/grade?movieId=146084"
 driver.get(url)
 time.sleep(1)
 
@@ -68,6 +68,7 @@ review_list = doc.select("ul.list_comment > li")
 
 print(f"전체리뷰 : {len(review_list)}")
 
+# 반복 1회마다 리뷰 1건씩 수집
 for item in review_list:
     print("="*100)
     review_score = item.select("div.ratings")[0].get_text()
@@ -79,26 +80,38 @@ for item in review_list:
     print(f"  - 리뷰: {review_content}")
     review_writer = item.select("a.link_nick > span")[1].get_text()  # [댓글 작성자, 작성자, 댓글 모아보기]
     print(f"  - 작성자: {review_writer}")
+    # 다음 영화리뷰 날짜 표기법 4가지
+    # 1. 조금전    : 현재시간(분) - 1분
+    # 2. ?분전     : 현재시간(분) - ?분
+    # 3. ?시간전   : 현재시간(시간) - ?시간
+    # 4. 2023.11.29. 13:12 : 그대로
     # 24시간 이내에 작성된 글은 날짜 -> 예: 21시간전, 17시간 전
     # 실제 날짜 표기법 -> 2023. 11. 17. 12:15
     # 표기법: 21시간 전 -> 2023. 11. 17. 12:15
 
     review_date = item.select("span.txt_date")[0].get_text()
-    if len(review_date) < 7:
-        # 예) 17시간전 -> 숫자만 추출: 17
-        reg_hour = int(re.sub(r"[^~0-9]", "", review_date))
-        # print(reg_hour)
-        # print(datetime.now())
-        # 예) 현재시간(2023. 11. 17. 12:29) - 18 = (2023. 11. 16 18:29:23.1231513)
-        review_date = (datetime.now()-timedelta(hours=reg_hour))
+
+    # review_date -> 4가지 표기법 중 1개
+    if review_date == "조금전":
+        review_date = (datetime.now() - timedelta(minutes=1)) #현재시간 - 1분
         review_date = review_date.strftime("%Y. &m. %d. %H:%M")
-        # 예) 2023. 11. 16 18:29:23.1231513 -> 2023. 11. 16. 18:29
+    elif review_date[-2:] == "분전":
+        # 1분전 ~ 59분전 -> "분전"
+        reg_minute = int(re.sub(r"[^~0-9]", "", review_date))
+        review_date = (datetime.now() - timedelta(minutes=reg_minute))
+        review_date = review_date.strftime("%Y. &m. %d. %H:%M")
+    elif review_date[-3:] == "시간전":
+        # 1시간~23시간 -> "시간전"
+        reg_hour = int(re.sub(r"[^~0-9]", "", review_date))
+        review_date = (datetime.now() - timedelta(hours=reg_hour))
+        review_date = review_date.strftime("%Y. &m. %d. %H:%M")
     print(f"  - 날짜: {review_date}")
     # 21시간 전 잘못 뜨는 경우를 어떤 조건으로 찾을 수 있을지?
     #print("수정 필요!")
 
     #MariaDB에 저장
     # 1) DB에 보낼 데이터 만들기
+    # Tip: key값, -> Table의 coulmn(열)과 동일하게
     data = {
         "title": movie_title,
         "score": review_score,
