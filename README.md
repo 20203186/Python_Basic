@@ -46,7 +46,7 @@
 
 ---
 
-### 4. <img width="512" height="512" alt="image" src="https://github.com/user-attachments/assets/c08b84e3-df10-4764-b38e-36078686dead" /> 'kill' 명령어
+### 4. <img width="16" height="16" alt="image" src="https://github.com/user-attachments/assets/c08b84e3-df10-4764-b38e-36078686dead" /> 'kill' 명령어
 
 'kill' 명령어는 지정된 PID 를 가진 프로세스에게 신호를 보내 프로세스를 제어하는 데 사용됩니다. 일반적으로 프로세스를 종료하는 데 사용됩니다.
 
