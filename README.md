@@ -10,7 +10,7 @@
 
 ---
 
-### 1. <img width="16" height="16" alt="image" src="https://github.com/user-attachments/assets/933da387-9ec1-45fc-b933-a2837cea1530" /> 명령어
+### 1. 🔝 명령어
 
 
 'top' 명령어는 시스템의 **실시간 상태를** 모니터링하는 데 사용됩니다. 특히 CPU, 메모리 사용률, 현재 실행중인 프로세스 목록 및 활동을 동적으로 보여줍니다.
