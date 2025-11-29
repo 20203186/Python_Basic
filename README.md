@@ -4,10 +4,12 @@
 
 ---
 
-<img width="16" height="16" alt="image" src="https://github.com/user-attachments/assets/aa4ebe4f-4bf9-43cf-92ee-988ff7acc5d6" /> 개요
+### <img width="16" height="16" alt="image" src="https://github.com/user-attachments/assets/aa4ebe4f-4bf9-43cf-92ee-988ff7acc5d6" /> 개요
 
-위 문서는 리눅스 명령어 중에서 top, ps, jobs, kill에 대해서 조사한 내용을 정리하고 있습니다.
+위 문서는 **리눅스** 명령어 중에서 top, ps, jobs, kill에 대해서 조사한 내용을 정리하고 있습니다.
 
 ---
+
+### 1. '<img width="512" height="512" alt="image" src="https://github.com/user-attachments/assets/933da387-9ec1-45fc-b933-a2837cea1530" />' 명령어
 
 
